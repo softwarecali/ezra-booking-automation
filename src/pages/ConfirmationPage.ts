@@ -4,14 +4,16 @@ export class ConfirmationPage {
   constructor(private page: Page) {}
 
   async verifyLoaded() {
-    await expect(this.page.locator('h4', { hasText: 'MRI Scan Appointment' })).toBeVisible();
+    await expect(this.page.getByText('Booking Confirmed')).toBeVisible();
   }
 
   async expectMedicalButtonPresent() {
-    await expect(this.page.locator('button', { hasText: 'Begin Medical Questionnaire' })).toBeVisible();
+    await expect(
+      this.page.locator('button[data-test="go-to-medical-btn"]')
+    ).toBeVisible();
   }
 
   async goToDashboard() {
-    await this.page.locator('a', { hasText: 'Go to Dashboard' }).click();
+    await this.page.locator('button[data-test="go-to-dashboard-btn"]').click();
   }
 }
